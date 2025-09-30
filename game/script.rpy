@@ -4,6 +4,7 @@ define d = Character('Dewi', color="#4040a0")
 define l = Character('Lestarta', color="#a04040")
 define p = Character('Pandu', color="#a0a040")
 define s = Character('Siti', color="#a040a0")
+define pf = Character('Pak Firman', color="#00e676")
 
 # Variables
 define confirm_ready = 0
@@ -78,7 +79,7 @@ label are_you_ready:
             jump are_you_ready
 
 label lesson_menu:
-    scene jombor lineart with fade
+    scene alley_a morning with fade
     
     menu:
         "1. Pengenalan Pemrograman":
@@ -342,4 +343,38 @@ label quiz_1:
         "Aku ingin kembali ke menu pelajaran.":
             jump lesson_menu
 
-    
+label lesson_2:
+    scene jombor lineart with fade
+    pf "Pelajaran ini masih dalam pengembangan. Silakan kembali lagi nanti."
+    jump lesson_menu
+
+label lesson_3:
+    scene jombor lineart with fade
+    pf "Pelajaran ini masih dalam pengembangan. Silakan kembali lagi nanti."
+    jump lesson_menu
+
+label lesson_4:
+    scene jombor lineart with fade
+    pf "Pelajaran ini masih dalam pengembangan. Silakan kembali lagi nanti."
+    jump lesson_menu
+
+label lesson_5:
+    scene jombor lineart with fade
+    pf "Pelajaran ini masih dalam pengembangan. Silakan kembali lagi nanti."
+    jump lesson_menu
+
+label lesson_6:
+    scene jombor lineart with fade
+    pf "Pelajaran ini masih dalam pengembangan. Silakan kembali lagi nanti."
+    jump lesson_menu
+
+label lesson_7:
+    scene jombor lineart with fade
+    pf "Pelajaran ini masih dalam pengembangan. Silakan kembali lagi nanti."
+    jump lesson_menu
+
+label lesson_8:
+    scene jombor lineart with fade
+    pf "Pelajaran ini masih dalam pengembangan. Silakan kembali lagi nanti."
+    pf "Padahal ini sedang kita lakukan, lho."
+    jump lesson_menu
