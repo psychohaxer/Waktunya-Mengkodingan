@@ -23,7 +23,7 @@ define gui.show_name = True
 
 ## Versi Permainan.
 
-define config.version = "0.1 alpha"
+define config.version = "0.1-alpha"
 
 
 ## Teks yang ditempatkan pada layar tentang game. Tempatkan teks di antara
@@ -215,3 +215,6 @@ init python:
 ## pisahkan dengan garis miring.
 
 # define build.itch_project = "renpytom/test-project"
+
+# Auto voice
+define config.auto_voice = "voice/{id}.mp3"
