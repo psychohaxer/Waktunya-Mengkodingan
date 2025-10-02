@@ -23,13 +23,17 @@ define gui.show_name = True
 
 ## The version of the game.
 
-define config.version = "1.0"
+define config.version = "0.1 Alpha"
 
 
 ## Text that is placed on the game's about screen. Place the text between the
 ## triple-quotes, and leave a blank line between paragraphs.
 
 define gui.about = _p("""
+Waktunya Mengkodingan
+Versi 0.1 Alpha
+
+Sebuah visual novel edukasi tentang pemrograman.
 """)
 
 
@@ -207,3 +211,6 @@ init python:
 ## by a slash.
 
 # define build.itch_project = "renpytom/test-project"
+
+# Auto voice
+define config.auto_voice = "voice/{id}.mp3"
