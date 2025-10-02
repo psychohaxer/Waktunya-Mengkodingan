@@ -23,13 +23,17 @@ define gui.show_name = True
 
 ## Versi Permainan.
 
-define config.version = "1.0"
+define config.version = "0.1 alpha"
 
 
 ## Teks yang ditempatkan pada layar tentang game. Tempatkan teks di antara
 ## tanda kutip tiga, dan biarkan baris kosong di antara paragraf.
 
 define gui.about = _p("""
+Waktunya Mengkodingan
+Versi 0.1 Alpha
+
+Sebuah visual novel edukasi tentang pemrograman.
 """)
 
 
