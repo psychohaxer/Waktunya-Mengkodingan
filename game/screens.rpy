@@ -1,12 +1,12 @@
 ﻿################################################################################
-## Initialization
+## Inisialisasi
 ################################################################################
 
 init offset = -1
 
 
 ################################################################################
-## Styles
+## Gaya
 ################################################################################
 
 style default:
@@ -78,20 +78,21 @@ style frame:
 
 
 ################################################################################
-## In-game screens
+## Layar In-game
 ################################################################################
 
 
-## Say screen ##################################################################
+## Layar Say ###################################################################
 ##
-## The say screen is used to display dialogue to the player. It takes two
-## parameters, who and what, which are the name of the speaking character and
-## the text to be displayed, respectively. (The who parameter can be None if no
-## name is given.)
+## Layar say di gunakan untuk menampilkan dialog kepada pemain. Ini menggunakan
+## dua parameter, who dan what, yang merupakan nama karakter yang berbicara dan
+## text yang akan di tampilkan, masing-masing. (Kedua parameter dapat berisi
+## None jika tidak ada nama yang di berikan.
 ##
-## This screen must create a text displayable with id "what", as Ren'Py uses
-## this to manage text display. It can also create displayables with id "who"
-## and id "window" to apply style properties.
+## Layar ini harus membuat text yang dapat di tampilkan dengan id "what", yang
+## di mana Ren'Py menggunakan ini untuk mengatur tampilan text. Ini juga dapat
+## membuat sesuatu yang dapat di tampilkan dengan id "who" dan id "window" untuk
+## mengaplikasikan properti gaya.
 ##
 ## https://www.renpy.org/doc/html/screen_special.html#say
 
@@ -110,13 +111,13 @@ screen say(who, what):
         text what id "what"
 
 
-    ## If there's a side image, display it above the text. Do not display on
-    ## the phone variant - there's no room.
+    ## Jika ada gambar di sisi, tampilkan di atas text. Jangan tampilkan di
+    ## versi HP[Handphone)(Android) - Karena tidak ada ruang.
     if not renpy.variant("small"):
         add SideImage() xalign 0.0 yalign 1.0
 
 
-## Make the namebox available for styling through the Character object.
+## Buat namebox tersedia untuk mengatur gaya melalui objek karakter.
 init python:
     config.character_id_prefixes.append('namebox')
 
@@ -161,13 +162,13 @@ style say_dialogue:
 
     adjust_spacing False
 
-## Input screen ################################################################
+## Layar masukkan/input ########################################################
 ##
-## This screen is used to display renpy.input. The prompt parameter is used to
-## pass a text prompt in.
+## Layar ini di gunakan untuk menampilkan renpy.input. Parameter prompt
+## digunakan untuk meneruskan text yang di prompt/minta.
 ##
-## This screen must create an input displayable with id "input" to accept the
-## various input parameters.
+## Layar ini harus membuat input yang dapat di tampilkan dengan id "input"
+## untuk menerima berbagai parameter masukan.
 ##
 ## https://www.renpy.org/doc/html/screen_special.html#input
 
@@ -196,11 +197,11 @@ style input:
     xmaximum gui.dialogue_width
 
 
-## Choice screen ###############################################################
+## Layar Pilihan ###############################################################
 ##
-## This screen is used to display the in-game choices presented by the menu
-## statement. The one parameter, items, is a list of objects, each with caption
-## and action fields.
+## Layar ini digunakan untuk menampilkan pilihan dalam game yang disajikan oleh
+## menu statement. Satu parameter, item, adalah daftar objek, masing-masing
+## dengan bidang keterangan dan tindakan.
 ##
 ## https://www.renpy.org/doc/html/screen_special.html#choice
 
@@ -230,14 +231,14 @@ style choice_button_text is default:
     properties gui.text_properties("choice_button")
 
 
-## Quick Menu screen ###########################################################
+## Layar Menu Cepat/Quick Menu #################################################
 ##
-## The quick menu is displayed in-game to provide easy access to the out-of-
-## game menus.
+## Menu cepat ditampilkan dalam game untuk memudahkan akses ke menu di luar
+## game.
 
 screen quick_menu():
 
-    ## Ensure this appears on top of other screens.
+    ## Memastikan ini muncul di atas layar yang lain.
     zorder 100
 
     if quick_menu:
@@ -246,18 +247,18 @@ screen quick_menu():
             style_prefix "quick"
             style "quick_menu"
 
-            textbutton _("Back") action Rollback()
-            textbutton _("History") action ShowMenu('history')
-            textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
-            textbutton _("Auto") action Preference("auto-forward", "toggle")
-            textbutton _("Save") action ShowMenu('save')
-            textbutton _("Q.Save") action QuickSave()
-            textbutton _("Q.Load") action QuickLoad()
-            textbutton _("Prefs") action ShowMenu('preferences')
+            textbutton _("Kembali") action Rollback()
+            textbutton _("Riwayat") action ShowMenu('history')
+            textbutton _("Lompati") action Skip() alternate Skip(fast=True, confirm=True)
+            textbutton _("Otomatis") action Preference("auto-forward", "toggle")
+            textbutton _("Simpan") action ShowMenu('save')
+            textbutton _("Simpan.C") action QuickSave()
+            textbutton _("Muat.C") action QuickLoad()
+            textbutton _("Setting") action ShowMenu('preferences')
 
 
-## This code ensures that the quick_menu screen is displayed in-game, whenever
-## the player has not explicitly hidden the interface.
+## Kode ini memastikan layar quick_menu di tampilkan di dalam permainan,
+## kapanpun player tidak secaralangsung menyembunyikan antarmuka.
 init python:
     config.overlay_screens.append("quick_menu")
 
@@ -279,13 +280,13 @@ style quick_button_text:
 
 
 ################################################################################
-## Main and Game Menu Screens
+## Layar Menu Utama dan Menu Permainan
 ################################################################################
 
-## Navigation screen ###########################################################
+## Layar navigasi ##############################################################
 ##
-## This screen is included in the main and game menus, and provides navigation
-## to other menus, and to start the game.
+## Layar ini di ikutsertakan di menu utama dan permainan, dan menyediakan
+## navigasi ke menu lainnya, dan untuk memulai permainan.
 
 screen navigation():
 
@@ -299,38 +300,38 @@ screen navigation():
 
         if main_menu:
 
-            textbutton _("Start") action Start()
+            textbutton _("Mulai") action Start()
 
         else:
 
-            textbutton _("History") action ShowMenu("history")
+            textbutton _("Riwayat") action ShowMenu("history")
 
-            textbutton _("Save") action ShowMenu("save")
+            textbutton _("Simpan") action ShowMenu("save")
 
-        textbutton _("Load") action ShowMenu("load")
+        textbutton _("Muat") action ShowMenu("load")
 
-        textbutton _("Preferences") action ShowMenu("preferences")
+        textbutton _("Setting") action ShowMenu("preferences")
 
         if _in_replay:
 
-            textbutton _("End Replay") action EndReplay(confirm=True)
+            textbutton _("Akhiri Replay") action EndReplay(confirm=True)
 
         elif not main_menu:
 
-            textbutton _("Main Menu") action MainMenu()
+            textbutton _("Menu Utama") action MainMenu()
 
-        textbutton _("About") action ShowMenu("about")
+        textbutton _("Tentang") action ShowMenu("about")
 
         if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
 
-            ## Help isn't necessary or relevant to mobile devices.
-            textbutton _("Help") action ShowMenu("help")
+            ## Bantuan tidak perlu atau relevan dengan perangkat mobile.
+            textbutton _("Bantuan") action ShowMenu("help")
 
         if renpy.variant("pc"):
 
-            ## The quit button is banned on iOS and unnecessary on Android and
-            ## Web.
-            textbutton _("Quit") action Quit(confirm=not main_menu)
+            ## Tombol keluar dilarang di iOS dan tidak diperlukan di Android
+            ## dan Web.
+            textbutton _("Keluar") action Quit(confirm=not main_menu)
 
 
 style navigation_button is gui_button
@@ -344,25 +345,25 @@ style navigation_button_text:
     properties gui.text_properties("navigation_button")
 
 
-## Main Menu screen ############################################################
+## Layar Menu utama ############################################################
 ##
-## Used to display the main menu when Ren'Py starts.
+## Digunakan untuk menampilkan menu utama ketika Ren'Py dimulai.
 ##
 ## https://www.renpy.org/doc/html/screen_special.html#main-menu
 
 screen main_menu():
 
-    ## This ensures that any other menu screen is replaced.
+    ## Ini Memastikan Layar Menu Yang Lain Telah Di Timpa
     tag menu
 
     add gui.main_menu_background
 
-    ## This empty frame darkens the main menu.
+    ## Frame kosong ini menggelap di menu utama.
     frame:
         style "main_menu_frame"
 
-    ## The use statement includes another screen inside this one. The actual
-    ## contents of the main menu are in the navigation screen.
+    ## Pernyataan 'use' mengikutsertakan layar lain ke layar ini. Isi
+    ## sebenarnya dari menu utama adalah layar navigasi.
     use navigation
 
     if gui.show_name:
@@ -406,14 +407,15 @@ style main_menu_version:
     properties gui.text_properties("version")
 
 
-## Game Menu screen ############################################################
+## layar Menu Permainan ########################################################
 ##
-## This lays out the basic common structure of a game menu screen. It's called
-## with the screen title, and displays the background, title, and navigation.
+## Ini menjalaskan struktur dasar yang paling sering di gunakan di layar
+## menu permainan, ini ditampilkan beserta layar judul, dan menampilkan latar
+## belakang,judul,dan navigasi.
 ##
-## The scroll parameter can be None, or one of "viewport" or "vpgrid".
-## This screen is intended to be used with one or more children, which are
-## transcluded (placed) inside it.
+## Parameter scroll dapat berisi 'None', atau "viewport" dan "vpgrid". Layar
+## ini di maksudkan untuk di gunakan dengan cabang satu atau lebih, yang di
+## tempatkan di dalamnya.
 
 screen game_menu(title, scroll=None, yinitial=0.0, spacing=0):
 
@@ -429,7 +431,7 @@ screen game_menu(title, scroll=None, yinitial=0.0, spacing=0):
 
         hbox:
 
-            ## Reserve space for the navigation section.
+            ## Memesan tempat untuk bagian navigasi.
             frame:
                 style "game_menu_navigation_frame"
 
@@ -475,7 +477,7 @@ screen game_menu(title, scroll=None, yinitial=0.0, spacing=0):
 
     use navigation
 
-    textbutton _("Return"):
+    textbutton _("Kembali"):
         style "return_button"
 
         action Return()
@@ -538,34 +540,34 @@ style return_button:
     yoffset -45
 
 
-## About screen ################################################################
+## Layar About #################################################################
 ##
-## This screen gives credit and copyright information about the game and Ren'Py.
+## Layar ini menampilkan credit dan informasi copyright tentang game dan Ren.Py.
 ##
-## There's nothing special about this screen, and hence it also serves as an
-## example of how to make a custom screen.
+## Tidak ada yang spesial dengan layar ini, semenjak ini juga berperan sebagai
+## contoh bagaimana membuat layar custom.
 
 screen about():
 
     tag menu
 
-    ## This use statement includes the game_menu screen inside this one. The
-    ## vbox child is then included inside the viewport inside the game_menu
-    ## screen.
-    use game_menu(_("About"), scroll="viewport"):
+    ## Pernyataan 'use' ini mengikutsertakan layar game_menu ke dalam layar
+    ## ini. Percabangan vbox lalu di ikutsertakan kedalam viewport di dalam
+    ## layar game_menu.
+    use game_menu(_("Tentang"), scroll="viewport"):
 
         style_prefix "about"
 
         vbox:
 
             label "[config.name!t]"
-            text _("Version [config.version!t]\n")
+            text _("Versi [config.version!t]\n")
 
-            ## gui.about is usually set in options.rpy.
+            ## gui.about biasanya di set di options.rpy.
             if gui.about:
                 text "[gui.about!t]\n"
 
-            text _("Made with {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
+            text _("Dibuat Dengan {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
 
 
 style about_label is gui_label
@@ -576,11 +578,11 @@ style about_label_text:
     size gui.label_text_size
 
 
-## Load and Save screens #######################################################
+## Layar Load and Save #########################################################
 ##
-## These screens are responsible for letting the player save the game and load
-## it again. Since they share nearly everything in common, both are implemented
-## in terms of a third screen, file_slots.
+## Layar ini bertanggungjawab untuk mengijinkan pemain menyimpan dan
+## meload lagi. Semenjak mereke hampir memiliki hal yang sama, keduanya di
+## implementasinan di percabangan layar ketiga, file_slots.
 ##
 ## https://www.renpy.org/doc/html/screen_special.html#save https://
 ## www.renpy.org/doc/html/screen_special.html#load
@@ -589,29 +591,29 @@ screen save():
 
     tag menu
 
-    use file_slots(_("Save"))
+    use file_slots(_("Simpan"))
 
 
 screen load():
 
     tag menu
 
-    use file_slots(_("Load"))
+    use file_slots(_("Muat"))
 
 
 screen file_slots(title):
 
-    default page_name_value = FilePageNameInputValue(pattern=_("Page {}"), auto=_("Automatic saves"), quick=_("Quick saves"))
+    default page_name_value = FilePageNameInputValue(pattern=_("Halaman {}"), auto=_("Otomatis save"), quick=_("Save cepat"))
 
     use game_menu(title):
 
         fixed:
 
-            ## This ensures the input will get the enter event before any of
-            ## the buttons do.
+            ## Ini memastikan input akan mendapat event masuk sebelum tombol
+            ## lainnya.
             order_reverse True
 
-            ## The page name, which can be edited by clicking on a button.
+            ## Nama halaman, yang dapat di edit dengan mengklik tombol.
             button:
                 style "page_label"
 
@@ -623,7 +625,7 @@ screen file_slots(title):
                     style "page_label_text"
                     value page_name_value
 
-            ## The grid of file slots.
+            ## Kolom slot file.
             grid gui.file_slot_cols gui.file_slot_rows:
                 style_prefix "slot"
 
@@ -643,7 +645,7 @@ screen file_slots(title):
 
                         add FileScreenshot(slot) xalign 0.5
 
-                        text FileTime(slot, format=_("{#file_time}%A, %B %d %Y, %H:%M"), empty=_("empty slot")):
+                        text FileTime(slot, format=_("{#file_time}%A, %B %d %Y, %H:%M"), empty=_("Slot Kosong")):
                             style "slot_time_text"
 
                         text FileSaveName(slot):
@@ -651,7 +653,7 @@ screen file_slots(title):
 
                         key "save_delete" action FileDelete(slot)
 
-            ## Buttons to access other pages.
+            ## Tombol untuk mengakses halaman lain.
             vbox:
                 style_prefix "page"
 
@@ -667,12 +669,12 @@ screen file_slots(title):
                     key "save_page_prev" action FilePagePrevious()
 
                     if config.has_autosave:
-                        textbutton _("{#auto_page}A") action FilePage("auto")
+                        textbutton _("{#auto_page}O") action FilePage("auto")
 
                     if config.has_quicksave:
-                        textbutton _("{#quick_page}Q") action FilePage("quick")
+                        textbutton _("{#quick_page}C") action FilePage("quick")
 
-                    ## range(1, 10) gives the numbers from 1 to 9.
+                    ## antara(1,10) beri nomor antara 1 sampai 9.
                     for page in range(1, 10):
                         textbutton "[page]" action FilePage(page)
 
@@ -681,11 +683,11 @@ screen file_slots(title):
 
                 if config.has_sync:
                     if CurrentScreenName() == "save":
-                        textbutton _("Upload Sync"):
+                        textbutton _("Sinkronisasi Unggah"):
                             action UploadSync()
                             xalign 0.5
                     else:
-                        textbutton _("Download Sync"):
+                        textbutton _("Unduh Sinkronisasi"):
                             action DownloadSync()
                             xalign 0.5
 
@@ -723,10 +725,10 @@ style slot_button_text:
     properties gui.text_properties("slot_button")
 
 
-## Preferences screen ##########################################################
+## Layar preferensi/opsi #######################################################
 ##
-## The preferences screen allows the player to configure the game to better
-## suit themselves.
+## Layar preferensi mengijinkan pemain untuk mengkonfigurasi permainan untuk
+## menyesuaikan gaya bermain masing masing individu.
 ##
 ## https://www.renpy.org/doc/html/screen_special.html#preferences
 
@@ -734,7 +736,7 @@ screen preferences():
 
     tag menu
 
-    use game_menu(_("Preferences"), scroll="viewport"):
+    use game_menu(_("Setting"), scroll="viewport"):
 
         vbox:
 
@@ -745,19 +747,20 @@ screen preferences():
 
                     vbox:
                         style_prefix "radio"
-                        label _("Display")
-                        textbutton _("Window") action Preference("display", "window")
-                        textbutton _("Fullscreen") action Preference("display", "fullscreen")
+                        label _("Tampilan")
+                        textbutton _("Jendela") action Preference("display", "window")
+                        textbutton _("Layar Penuh") action Preference("display", "fullscreen")
 
                 vbox:
                     style_prefix "check"
-                    label _("Skip")
-                    textbutton _("Unseen Text") action Preference("skip", "toggle")
-                    textbutton _("After Choices") action Preference("after choices", "toggle")
-                    textbutton _("Transitions") action InvertSelected(Preference("transitions", "toggle"))
+                    label _("Lompati")
+                    textbutton _("Belum Terlihat") action Preference("skip", "toggle")
+                    textbutton _("Setelah Pilihan") action Preference("after choices", "toggle")
+                    textbutton _("Transisi") action InvertSelected(Preference("transitions", "toggle"))
 
-                ## Additional vboxes of type "radio_pref" or "check_pref" can
-                ## be added here, to add additional creator-defined preferences.
+                ## Tipe tambahan vboxes "radio_pref" atau "check_pref" dapat di
+                ## tambahkan disini, untuk menambahkan tambahan preferensi yang
+                ## dibuat creator.
 
             null height (4 * gui.pref_spacing)
 
@@ -767,46 +770,46 @@ screen preferences():
 
                 vbox:
 
-                    label _("Text Speed")
+                    label _("Kecepatan Text")
 
                     bar value Preference("text speed")
 
-                    label _("Auto-Forward Time")
+                    label _("Waktu Otomatis-Maju")
 
                     bar value Preference("auto-forward time")
 
                 vbox:
 
                     if config.has_music:
-                        label _("Music Volume")
+                        label _("Volume Musik")
 
                         hbox:
                             bar value Preference("music volume")
 
                     if config.has_sound:
 
-                        label _("Sound Volume")
+                        label _("Volume Suara")
 
                         hbox:
                             bar value Preference("sound volume")
 
                             if config.sample_sound:
-                                textbutton _("Test") action Play("sound", config.sample_sound)
+                                textbutton _("Tes") action Play("sound", config.sample_sound)
 
 
                     if config.has_voice:
-                        label _("Voice Volume")
+                        label _("Volume Vokal")
 
                         hbox:
                             bar value Preference("voice volume")
 
                             if config.sample_voice:
-                                textbutton _("Test") action Play("voice", config.sample_voice)
+                                textbutton _("Tes") action Play("voice", config.sample_voice)
 
                     if config.has_music or config.has_sound or config.has_voice:
                         null height gui.pref_spacing
 
-                        textbutton _("Mute All"):
+                        textbutton _("Senyapkan Semua"):
                             action Preference("all mute", "toggle")
                             style "mute_all_button"
 
@@ -882,11 +885,11 @@ style slider_vbox:
     xsize 675
 
 
-## History screen ##############################################################
+## Layar Riwayat ###############################################################
 ##
-## This is a screen that displays the dialogue history to the player. While
-## there isn't anything special about this screen, it does have to access the
-## dialogue history stored in _history_list.
+## Layar yang menampilkan History dialog kepada pemain. Semenjak tidak ada
+## yang spesial tentang layar ini, ini memiliki akses ke history dialog yang di
+## simpan di _history_list.
 ##
 ## https://www.renpy.org/doc/html/history.html
 
@@ -894,10 +897,10 @@ screen history():
 
     tag menu
 
-    ## Avoid predicting this screen, as it can be very large.
+    ## Hindari mempredisi layar ini, ini dapat berukuran sangat besar.
     predict False
 
-    use game_menu(_("History"), scroll=("vpgrid" if gui.history_height else "viewport"), yinitial=1.0, spacing=gui.history_spacing):
+    use game_menu(_("Riwayat"), scroll=("vpgrid" if gui.history_height else "viewport"), yinitial=1.0, spacing=gui.history_spacing):
 
         style_prefix "history"
 
@@ -905,7 +908,8 @@ screen history():
 
             window:
 
-                ## This lays things out properly if history_height is None.
+                ## Ini menampilkan layar secara semestinya jika history_height
+                ## memiliki value None.
                 has fixed:
                     yfit True
 
@@ -915,8 +919,8 @@ screen history():
                         style "history_name"
                         substitute False
 
-                        ## Take the color of the who text from the Character,
-                        ## if set.
+                        ## Mengambil warna dari text 'who' dari karakter, jika
+                        ## di set.
                         if "color" in h.who_args:
                             text_color h.who_args["color"]
 
@@ -925,10 +929,10 @@ screen history():
                     substitute False
 
         if not _history_list:
-            label _("The dialogue history is empty.")
+            label _("Riwayat dialog kosong.")
 
 
-## This determines what tags are allowed to be displayed on the history screen.
+## Ini menentukan tag apa yang diizinkan ditampilkan di layar sejarah/catatan.
 
 define gui.history_allow_tags = { "alt", "noalt", "rt", "rb", "art" }
 
@@ -972,11 +976,11 @@ style history_label_text:
     xalign 0.5
 
 
-## Help screen #################################################################
+## Layar Bantuan ###############################################################
 ##
-## A screen that gives information about key and mouse bindings. It uses other
-## screens (keyboard_help, mouse_help, and gamepad_help) to display the actual
-## help.
+## Layar yang memberikan informasi tentang keyboard dan mouse binding. Ini
+## menggunakan layar lain (keyboard_help, mouse_help, and gamepad_help) untuk
+## menampilkan bantuan yang sebenarnya.
 
 screen help():
 
@@ -984,7 +988,7 @@ screen help():
 
     default device = "keyboard"
 
-    use game_menu(_("Help"), scroll="viewport"):
+    use game_menu(_("Bantuan"), scroll="viewport"):
 
         style_prefix "help"
 
@@ -993,8 +997,8 @@ screen help():
 
             hbox:
 
-                textbutton _("Keyboard") action SetScreenVariable("device", "keyboard")
-                textbutton _("Mouse") action SetScreenVariable("device", "mouse")
+                textbutton _("Papanketik") action SetScreenVariable("device", "keyboard")
+                textbutton _("Tetikus") action SetScreenVariable("device", "mouse")
 
                 if GamepadExists():
                     textbutton _("Gamepad") action SetScreenVariable("device", "gamepad")
@@ -1010,104 +1014,104 @@ screen help():
 screen keyboard_help():
 
     hbox:
-        label _("Enter")
-        text _("Advances dialogue and activates the interface.")
+        label _("Masukkan")
+        text _("Dialog tingkat lanjut dan mengaktifkan antarmuka.")
 
     hbox:
-        label _("Space")
-        text _("Advances dialogue without selecting choices.")
+        label _("Spasi")
+        text _("Dialog tingkat lanjut tanpa memilih pilihan.")
 
     hbox:
-        label _("Arrow Keys")
-        text _("Navigate the interface.")
+        label _("Tombol Panah")
+        text _("Navigasi di antarmuka")
 
     hbox:
-        label _("Escape")
-        text _("Accesses the game menu.")
+        label _("Melarikan diri")
+        text _("Akses menu permainan.")
 
     hbox:
         label _("Ctrl")
-        text _("Skips dialogue while held down.")
+        text _("Lompati dialog ketika di tahan.")
 
     hbox:
         label _("Tab")
-        text _("Toggles dialogue skipping.")
+        text _("Nyala/Matikan lompati dialog.")
 
     hbox:
-        label _("Page Up")
-        text _("Rolls back to earlier dialogue.")
+        label _("Halaman Atas")
+        text _("Putar mundur ke dialog sebelumnya.")
 
     hbox:
         label _("Page Down")
-        text _("Rolls forward to later dialogue.")
+        text _("Putar maju ke dialog berikut.")
 
     hbox:
         label "H"
-        text _("Hides the user interface.")
+        text _("Sembunyikan antarmuka.")
 
     hbox:
         label "S"
-        text _("Takes a screenshot.")
+        text _("Ambiil tangkapan layar.")
 
     hbox:
         label "V"
-        text _("Toggles assistive {a=https://www.renpy.org/l/voicing}self-voicing{/a}.")
+        text _("Nyalakan assisten {a=https://www.renpy.org/l/voicing}suara-sendiri{/a}")
 
     hbox:
         label "Shift+A"
-        text _("Opens the accessibility menu.")
+        text _("Membuka menu aksesibilitas.")
 
 
 screen mouse_help():
 
     hbox:
-        label _("Left Click")
-        text _("Advances dialogue and activates the interface.")
+        label _("Klik Kiri")
+        text _("Dialog tingkat lanjut dan mengaktifkan antarmuka.")
 
     hbox:
-        label _("Middle Click")
-        text _("Hides the user interface.")
+        label _("Klik Tengah")
+        text _("Sembunyikan antarmuka.")
 
     hbox:
-        label _("Right Click")
-        text _("Accesses the game menu.")
+        label _("Klik Kanan")
+        text _("Akses menu permainan.")
 
     hbox:
-        label _("Mouse Wheel Up")
-        text _("Rolls back to earlier dialogue.")
+        label _("Roda Mouse Atas")
+        text _("Putar mundur ke dialog sebelumnya.")
 
     hbox:
-        label _("Mouse Wheel Down")
-        text _("Rolls forward to later dialogue.")
+        label _("Roda Mouse Bawah")
+        text _("Putar maju ke dialog berikut.")
 
 
 screen gamepad_help():
 
     hbox:
-        label _("Right Trigger\nA/Bottom Button")
-        text _("Advances dialogue and activates the interface.")
+        label _("Trigger Kanan\nA/Tombol Bawah")
+        text _("Dialog tingkat lanjut dan mengaktifkan antarmuka.")
 
     hbox:
-        label _("Left Trigger\nLeft Shoulder")
-        text _("Rolls back to earlier dialogue.")
+        label _("Trigger Kiri\nBahu Kiri")
+        text _("Putar mundur ke dialog sebelumnya.")
 
     hbox:
-        label _("Right Shoulder")
-        text _("Rolls forward to later dialogue.")
+        label _("Pundak Kanan")
+        text _("Putar maju ke dialog berikut.")
 
     hbox:
-        label _("D-Pad, Sticks")
-        text _("Navigate the interface.")
+        label _("D-Pad, Stick")
+        text _("Navigasi di antarmuka")
 
     hbox:
         label _("Start, Guide, B/Right Button")
-        text _("Accesses the game menu.")
+        text _("Akses menu permainan.")
 
     hbox:
-        label _("Y/Top Button")
-        text _("Hides the user interface.")
+        label _("Y/Tombol Atas")
+        text _("Sembunyikan antarmuka.")
 
-    textbutton _("Calibrate") action GamepadCalibrate()
+    textbutton _("Kalibrasi") action GamepadCalibrate()
 
 
 style help_button is gui_button
@@ -1135,20 +1139,21 @@ style help_label_text:
 
 
 ################################################################################
-## Additional screens
+## Layar Tambahan
 ################################################################################
 
 
-## Confirm screen ##############################################################
+## Layar konfirmasi ############################################################
 ##
-## The confirm screen is called when Ren'Py wants to ask the player a yes or no
-## question.
+## Layar konfirmasi di panggil ketika Ren'Py mau menanyakan ke pemain
+## pertanyaan ya atau tidak.
 ##
 ## https://www.renpy.org/doc/html/screen_special.html#confirm
 
 screen confirm(message, yes_action, no_action):
 
-    ## Ensure other screens do not get input while this screen is displayed.
+    ## Memastikan layar lain tidak mendapatkan input ketika layar ini di
+    ## panggil.
     modal True
 
     zorder 200
@@ -1172,10 +1177,10 @@ screen confirm(message, yes_action, no_action):
                 xalign 0.5
                 spacing 150
 
-                textbutton _("Yes") action yes_action
-                textbutton _("No") action no_action
+                textbutton _("Ya") action yes_action
+                textbutton _("Tidak") action no_action
 
-    ## Right-click and escape answer "no".
+    ## Klik kanan dan jawaban escape "Tidak".
     key "game_menu" action no_action
 
 
@@ -1202,10 +1207,10 @@ style confirm_button_text:
     properties gui.text_properties("confirm_button")
 
 
-## Skip indicator screen #######################################################
+## Lompati indikator layar #####################################################
 ##
-## The skip_indicator screen is displayed to indicate that skipping is in
-## progress.
+## layar skip_indicator di tampilkan untuk mengindikasian proses skipping
+## sedang dalam proses.
 ##
 ## https://www.renpy.org/doc/html/screen_special.html#skip-indicator
 
@@ -1219,14 +1224,14 @@ screen skip_indicator():
         hbox:
             spacing 9
 
-            text _("Skipping")
+            text _("Melompati")
 
             text "▸" at delayed_blink(0.0, 1.0) style "skip_triangle"
             text "▸" at delayed_blink(0.2, 1.0) style "skip_triangle"
             text "▸" at delayed_blink(0.4, 1.0) style "skip_triangle"
 
 
-## This transform is used to blink the arrows one after another.
+## transform digunakan untuk mengkedipkan panah setelah yang lain.
 transform delayed_blink(delay, cycle):
     alpha .5
 
@@ -1253,15 +1258,15 @@ style skip_text:
     size gui.notify_text_size
 
 style skip_triangle:
-    ## We have to use a font that has the BLACK RIGHT-POINTING SMALL TRIANGLE
-    ## glyph in it.
+    ## Kami harus menggunakan font yang mempunyai glyph BLACK RIGHT-POINTING
+    ## SMALL TRIANGLE didalamnya.
     font "DejaVuSans.ttf"
 
 
-## Notify screen ###############################################################
+## Layar pemberitahuan #########################################################
 ##
-## The notify screen is used to show the player a message. (For example, when
-## the game is quicksaved or a screenshot has been taken.)
+## layar notify digunakan untuk menampilkan pesan kepada pemain. (Seperti,
+## ketika game di simpan cepat atau screenshot di ambil.)
 ##
 ## https://www.renpy.org/doc/html/screen_special.html#notify-screen
 
@@ -1297,9 +1302,9 @@ style notify_text:
     properties gui.text_properties("notify")
 
 
-## NVL screen ##################################################################
+## Layar NVL ###################################################################
 ##
-## This screen is used for NVL-mode dialogue and menus.
+## Layar ini digunakan untuk dialog dan menu mode-NVL.
 ##
 ## https://www.renpy.org/doc/html/screen_special.html#nvl
 
@@ -1312,7 +1317,7 @@ screen nvl(dialogue, items=None):
         has vbox:
             spacing gui.nvl_spacing
 
-        ## Displays dialogue in either a vpgrid or the vbox.
+        ## Menampilkan dialog pada vpgrid atau vbox.
         if gui.nvl_height:
 
             vpgrid:
@@ -1325,8 +1330,8 @@ screen nvl(dialogue, items=None):
 
             use nvl_dialogue(dialogue)
 
-        ## Displays the menu, if given. The menu may be displayed incorrectly
-        ## if config.narrator_menu is set to True.
+        ## Menampilkan menu, jika diberikan. Menu dapat ditampilkan dengan
+        ## tidak benar jika config.narrator_menu diatur ke True.
         for i in items:
 
             textbutton i.caption:
@@ -1355,8 +1360,8 @@ screen nvl_dialogue(dialogue):
                     id d.what_id
 
 
-## This controls the maximum number of NVL-mode entries that can be displayed
-## at once.
+## Ini mengendalikan angka maksimum entri mode-NVL yang dapat di tampilkan
+## sekaligus.
 define config.nvl_list_length = gui.nvl_list_length
 
 style nvl_window is default
@@ -1415,12 +1420,12 @@ style nvl_button_text:
     properties gui.text_properties("nvl_button")
 
 
-## Bubble screen ###############################################################
+## Layar gelembung #############################################################
 ##
-## The bubble screen is used to display dialogue to the player when using
-## speech bubbles. The bubble screen takes the same parameters as the say
-## screen, must create a displayable with the id of "what", and can create
-## displayables with the "namebox", "who", and "window" ids.
+## Layar gelembung digunakan untuk menampilkan dialog kepada pemain saat
+## menggunakan gelembung ucapan. Layar gelembung mengambil parameter yang sama
+## dengan layar ucapkan, harus membuat tampilan dengan id "apa", dan dapat
+## membuat tampilan dengan id "kotak nama", "siapa", dan "jendela".
 ##
 ## https://www.renpy.org/doc/html/bubble.html#bubble-screen
 
@@ -1510,15 +1515,15 @@ define bubble.expand_area = {
 
 
 ################################################################################
-## Mobile Variants
+## Versi Mobile(HP/Handphone/Android)
 ################################################################################
 
 style pref_vbox:
     variant "medium"
     xsize 675
 
-## Since a mouse may not be present, we replace the quick menu with a version
-## that uses fewer and bigger buttons that are easier to touch.
+## Semenjak mouse tidak ada, kami mengganti menu cepat dengan yang menggunakan
+## tombol yang lebih besar dan sedikit, yang memudahkan untuk di sentuh.
 screen quick_menu():
     variant "touch"
 
@@ -1530,9 +1535,9 @@ screen quick_menu():
             style "quick_menu"
             style_prefix "quick"
 
-            textbutton _("Back") action Rollback()
-            textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
-            textbutton _("Auto") action Preference("auto-forward", "toggle")
+            textbutton _("Kembali") action Rollback()
+            textbutton _("Lompati") action Skip() alternate Skip(fast=True, confirm=True)
+            textbutton _("Otomatis") action Preference("auto-forward", "toggle")
             textbutton _("Menu") action ShowMenu()
 
 
